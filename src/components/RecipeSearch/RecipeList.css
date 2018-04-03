@@ -1,0 +1,10 @@
+.RecipeList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 5px;
+    width: 300px;
+    height: 320px;
+}
