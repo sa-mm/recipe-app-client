@@ -1,6 +1,6 @@
 import { LOGIN_SUCCESS, LOGIN_FAILURE } from "../actions/login";
 
-const initialState = { email: "", name: "" };
+const initialState = { email: "", name: "", isLoggedIn: false };
 
 const sessionReducer = (state = initialState, action) => {
   const { type, payload } = action;
@@ -8,11 +8,13 @@ const sessionReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
+        isLoggedIn: true,
         email: payload
       };
     case LOGIN_FAILURE:
       return {
-        ...state
+        ...state,
+        isLoggedIn: false
       };
     default:
       return state;

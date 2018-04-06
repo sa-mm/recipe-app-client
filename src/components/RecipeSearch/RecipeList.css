@@ -1,10 +1,35 @@
 .RecipeList {
+    margin: 0 auto;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-gap: 1rem;
+    justify-content: space-between;
+}
+
+
+/* .RecipeList:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.card-container {
     display: flex;
     flex-wrap: wrap;
 }
 
 .card {
-    margin: 5px;
     width: 300px;
-    height: 320px;
+    height: 300px;
+}
+
+.more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card:hover {
+    cursor: pointer;
 }

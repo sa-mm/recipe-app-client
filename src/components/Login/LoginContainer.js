@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
 import Login from "./Login";
 import { login } from "../../actions/login";
 
@@ -12,9 +13,10 @@ class LoginContainer extends React.Component {
     super(props);
     this.state = { email: props.session.email, password: "" };
   }
-  handleChange = type => e => {
+
+  handleChange = ({ currentTarget: { name, value } }) => {
     this.setState({
-      [type]: e.target.value
+      [name]: value
     });
   };
   handleSubmit = e => {
@@ -24,6 +26,7 @@ class LoginContainer extends React.Component {
   };
   render() {
     const { email, password } = this.state;
+
     return (
       <Login
         {...{ email, password }}
@@ -36,7 +39,16 @@ class LoginContainer extends React.Component {
 
 LoginContainer.propTypes = {
   login: PropTypes.func.isRequired,
-  session: PropTypes.object.isRequired
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired
+  }).isRequired,
+  session: PropTypes.shape({
+    isLoggedIn: PropTypes.bool.isRequired
+  }).isRequired
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(LoginContainer);

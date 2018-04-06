@@ -5,7 +5,8 @@ import RecipeList from "./RecipeList";
 import { connect } from "react-redux";
 import { addRecipe, searchRecipe, additionalRecipes } from "../../actions";
 
-import { hits } from "../../data/mockRecipeResponse";
+import { withRouter } from "react-router";
+import { compose } from "redux";
 
 const mapStateToProps = ({ search }) => ({ search });
 const mapDispatchToProps = {
@@ -16,8 +17,7 @@ const mapDispatchToProps = {
 
 class RecipeSearchContainer extends React.Component {
   state = {
-    value: "",
-    recipes: hits.map(e => e.recipe)
+    value: ""
   };
 
   handleSubmit = event => {
@@ -35,6 +35,10 @@ class RecipeSearchContainer extends React.Component {
 
   handleRecipeClick = (recipeId, recipe) => event => {
     this.props.addRecipe(recipeId, recipe);
+    this.props.history.push({
+      pathname: `recipe/${recipeId}`,
+      state: { recipe }
+    });
   };
 
   render() {
@@ -58,6 +62,7 @@ class RecipeSearchContainer extends React.Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  RecipeSearchContainer
-);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapDispatchToProps)
+)(RecipeSearchContainer);

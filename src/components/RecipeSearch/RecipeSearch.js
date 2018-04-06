@@ -1,16 +1,19 @@
 import React from "react";
+import { RaisedButton, TextField } from "material-ui";
+
+import "./RecipeSearch.css";
 
 const RecipeSearch = props => {
   const { value, handleSubmit, handleChange } = props;
 
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handleSubmit}>
         <label>
-          Keywords:
-          <input type="text" value={value} onChange={handleChange} />
+          Keywords:{" "}
+          <TextField value={value} onChange={handleChange} name="Keywords" />
         </label>
-        <input type="submit" value="Submit" />
+        <RaisedButton className="button" type="submit" label="Search" />
       </form>
     </div>
   );

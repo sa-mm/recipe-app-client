@@ -8,8 +8,6 @@ class App extends Component {
       <div>
         <Nav />
 
-        <hr />
-
         <Main />
       </div>
     );

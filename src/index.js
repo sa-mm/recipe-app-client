@@ -20,6 +20,13 @@ import thunk from "redux-thunk";
 
 import reducers from "./reducers"; // Or wherever you keep your reducers
 
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import injectTapEventPlugin from "react-tap-event-plugin";
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
+
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();
 
@@ -39,11 +46,13 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <App />
+      </ConnectedRouter>
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById("root")
 );
 registerServiceWorker();

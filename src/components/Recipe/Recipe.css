@@ -1,0 +1,11 @@
+.Recipe {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  justify-content: center;
+}
+
+.item {
+  margin: 10px;
+  max-width: 300px;
+}

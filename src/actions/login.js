@@ -1,5 +1,5 @@
-import axios from "axios";
-
+// import axios from "axios";
+import { push } from "react-router-redux";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
@@ -19,8 +19,12 @@ const loginFailure = () => {
 
 export const login = (email, password) => {
   return dispatch => {
-    console.log(email);
-    dispatch(loginSuccess(email));
+    if (email && password) {
+      dispatch(loginSuccess(email));
+      dispatch(push("/"));
+    } else {
+      dispatch(loginFailure());
+    }
     // axios({
     //   method: "post",
     //   url: "/api/recipe_instructions",

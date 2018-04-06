@@ -1,22 +1,47 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Link, withRouter } from "react-router-dom";
+import { AppBar, ToolbarGroup, FlatButton } from "material-ui";
+import { connect } from "react-redux";
+import { compose } from "redux";
 
-const Nav = props => {
-  return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to="/">Home</NavLink>
-        </li>
-        <li>
-          <NavLink to="/profile">Profile</NavLink>
-        </li>
-        <li>
-          <NavLink to="/login">Login</NavLink>
-        </li>
-      </ul>
-    </nav>
-  );
-};
+const MyNavLinks = ({ isLoggedIn }) => (
+  <ToolbarGroup>
+    {isLoggedIn ? (
+      <FlatButton label="Profile" containerElement={<Link to="/profile" />} />
+    ) : (
+      <FlatButton label="Login" containerElement={<Link to="/login" />} />
+    )}
+  </ToolbarGroup>
+);
 
-export default Nav;
+const mapStateToProps = ({ session }) => ({ session });
+
+class MyAppBar extends React.Component {
+  static propTypes = {
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+      replace: PropTypes.func.isRequired
+    }).isRequired,
+    session: PropTypes.shape({
+      isLoggedIn: PropTypes.bool.isRequired
+    }).isRequired
+  };
+
+  handleTitleClick = () => {
+    this.props.history.push("/");
+  };
+
+  render() {
+    const { session: { isLoggedIn } } = this.props;
+    return (
+      <AppBar
+        title="Recipe App"
+        onTitleClick={this.handleTitleClick}
+        iconElementRight={<MyNavLinks isLoggedIn={isLoggedIn} />}
+      />
+    );
+  }
+}
+
+export default compose(withRouter, connect(mapStateToProps))(MyAppBar);

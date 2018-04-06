@@ -23,12 +23,13 @@ class RecipeContainer extends React.Component {
       label = "",
       ingredients = [],
       url = "",
-      instructions = []
+      instructions = [],
+      image
     } = recipe;
 
     return (
       <Recipe
-        {...{ label, ingredients, url, instructions }}
+        {...{ label, ingredients, url, instructions, image }}
         handleStepsClick={this.handleStepsClick}
       />
     );
