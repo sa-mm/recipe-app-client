@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Note from "./Note";
-import { Paper } from "material-ui";
+import { Paper, Subheader } from "material-ui";
 import "./RecipeNotes.css";
 
 const RecipeNotes = props => {
@@ -15,6 +15,7 @@ const RecipeNotes = props => {
   return (
     <Paper>
       <div className="RecipeNotes">
+        <Subheader>Recipe Notes</Subheader>
         {notes.map((note, i) => {
           return (
             <Note
@@ -22,7 +23,6 @@ const RecipeNotes = props => {
               value={note}
               handleNoteChange={handleNoteChange(i)}
               handleAddNoteToRecipe={handleAddNoteToRecipe(i)}
-              hasDrag={notes.length > 1}
               handleDeleteNoteClick={handleDeleteNoteClick(i)}
             />
           );

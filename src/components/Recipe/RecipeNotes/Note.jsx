@@ -4,14 +4,12 @@ import PropTypes from "prop-types";
 import { TextField, IconButton } from "material-ui";
 import Save from "material-ui/svg-icons/content/save";
 import Delete from "material-ui/svg-icons/action/delete";
-import DragHandle from "material-ui/svg-icons/editor/drag-handle";
 
 const Note = props => {
   const {
     value,
     handleNoteChange,
     handleAddNoteToRecipe,
-    hasDrag,
     handleDeleteNoteClick
   } = props;
   return (
@@ -23,7 +21,7 @@ const Note = props => {
         marginLeft: "15px"
       }}
     >
-      <div style={{ alignSelf: "center" }}>{hasDrag && <DragHandle />}</div>
+      <div style={{ alignSelf: "center" }} />
       <TextField
         fullWidth
         hintText="Add your note here."
@@ -51,7 +49,6 @@ Note.propTypes = {
   value: PropTypes.string,
   handleNoteChange: PropTypes.func.isRequired,
   handleAddNoteToRecipe: PropTypes.func.isRequired,
-  hasDrag: PropTypes.bool.isRequired,
   handleDeleteNoteClick: PropTypes.func.isRequired
 };
 

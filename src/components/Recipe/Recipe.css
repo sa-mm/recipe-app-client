@@ -1,9 +1,15 @@
 .Recipe {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap-reverse;
     margin-top: 40px;
     justify-content: center;
     counter-reset: step;
+}
+
+@media only screen and (min-width: 640px) {
+    .Recipe {
+        flex-wrap: wrap;
+    }
 }
 
 .item {
