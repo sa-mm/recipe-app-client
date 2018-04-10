@@ -86,7 +86,9 @@ RecipeCollectionDrawer.propTypes = {
       recipe: PropTypes.object.isRequired,
       id: PropTypes.string.isRequired
     })
-  )
+  ),
+  removeGroceryItem: PropTypes.func.isRequired,
+  groceryList: PropTypes.array.isRquired
 };
 
 export default compose(withRouter, connect(mapState, mapDispatch))(
