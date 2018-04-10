@@ -30,7 +30,7 @@ const mapDispatchToProps = {
   removeGroceryItem
 };
 
-class RecipeContainer extends React.Component {
+export class RecipeContainer extends React.Component {
   state = {
     recipe: {},
     newNote: false,
@@ -59,7 +59,7 @@ class RecipeContainer extends React.Component {
       notes = item.notes || [];
       isInCollection = true;
     } else {
-      recipe = recipes[recipeId] || negroni;
+      recipe = recipes[recipeId];
     }
 
     this.setState({
@@ -181,6 +181,11 @@ class RecipeContainer extends React.Component {
 }
 
 RecipeContainer.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      recipeId: PropTypes.string.isRequired
+    })
+  }),
   recipes: PropTypes.object.isRequired,
   recipeCollection: PropTypes.array.isRequired,
   groceryList: PropTypes.array.isRequired,
@@ -191,6 +196,17 @@ RecipeContainer.propTypes = {
   deleteNoteFromRecipe: PropTypes.func.isRequired,
   addGroceryItem: PropTypes.func.isRequired,
   removeGroceryItem: PropTypes.func.isRequired
+};
+
+RecipeContainer.defaultProps = {
+  match: {
+    params: {
+      recipeId: "recipe_6bfea91e502d9dd08b97ed55dd2a2f66"
+    }
+  },
+  recipes: {
+    recipe_6bfea91e502d9dd08b97ed55dd2a2f66: negroni
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeContainer);

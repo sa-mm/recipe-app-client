@@ -24,7 +24,7 @@ const RecipeSearch = props => {
 RecipeSearch.propTypes = {
   value: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRquired
+  handleChange: PropTypes.func.isRequired
 };
 
 export default RecipeSearch;

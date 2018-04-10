@@ -16,7 +16,7 @@ const mapState = ({ recipeCollection, groceryList }) => ({
 
 const mapDispatch = { removeGroceryItem };
 
-class RecipeCollectionDrawer extends React.Component {
+export class RecipeCollectionDrawer extends React.Component {
   handleItemClick = (recipe, recipeId) => event => {
     const { handleMenuClick, history } = this.props;
     history.push({
@@ -86,9 +86,15 @@ RecipeCollectionDrawer.propTypes = {
       recipe: PropTypes.object.isRequired,
       id: PropTypes.string.isRequired
     })
-  ),
+  ).isRequired,
   removeGroceryItem: PropTypes.func.isRequired,
-  groceryList: PropTypes.array.isRquired
+  groceryList: PropTypes.arrayOf(
+    PropTypes.shape({
+      item: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+      recipeId: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 export default compose(withRouter, connect(mapState, mapDispatch))(

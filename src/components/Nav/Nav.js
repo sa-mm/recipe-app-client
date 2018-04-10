@@ -5,7 +5,7 @@ import { AppBar, ToolbarGroup, FlatButton } from "material-ui";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
-const MyNavLinks = ({ isLoggedIn }) => (
+export const MyNavLinks = ({ isLoggedIn }) => (
   <ToolbarGroup>
     {isLoggedIn ? (
       <FlatButton label="Profile" containerElement={<Link to="/profile" />} />
@@ -17,7 +17,7 @@ const MyNavLinks = ({ isLoggedIn }) => (
 
 const mapStateToProps = ({ session }) => ({ session });
 
-class MyAppBar extends React.Component {
+export class MyAppBar extends React.Component {
   handleTitleClick = () => {
     this.props.history.push("/");
   };

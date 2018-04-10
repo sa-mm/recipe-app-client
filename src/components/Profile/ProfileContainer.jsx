@@ -8,7 +8,7 @@ import { withRouter } from "react-router";
 
 const mapState = ({ session }) => ({ session });
 
-class ProfileContainer extends React.Component {
+export class ProfileContainer extends React.Component {
   render() {
     const { session, history } = this.props;
     const { isLoggedIn } = session;

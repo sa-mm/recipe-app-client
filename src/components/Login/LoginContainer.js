@@ -8,10 +8,12 @@ import { login } from "../../actions/login";
 
 const mapStateToProps = ({ session }) => ({ session });
 const mapDispatchToProps = { login };
-class LoginContainer extends React.Component {
+
+export class LoginContainer extends React.Component {
   constructor(props) {
+    const { email, name } = props.session;
     super(props);
-    this.state = { email: props.session.email, password: "" };
+    this.state = { email, name, password: "" };
   }
 
   handleChange = ({ currentTarget: { name, value } }) => {
@@ -25,11 +27,11 @@ class LoginContainer extends React.Component {
     this.props.login(email, password);
   };
   render() {
-    const { email, password } = this.state;
+    const { email, password, name } = this.state;
 
     return (
       <Login
-        {...{ email, password }}
+        {...{ email, password, name }}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}
       />
@@ -44,7 +46,9 @@ LoginContainer.propTypes = {
     replace: PropTypes.func.isRequired
   }).isRequired,
   session: PropTypes.shape({
-    isLoggedIn: PropTypes.bool.isRequired
+    isLoggedIn: PropTypes.bool.isRequired,
+    email: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
   }).isRequired
 };
 

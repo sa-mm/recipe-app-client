@@ -16,7 +16,7 @@ const mapDispatchToProps = {
   addRecipe
 };
 
-class RecipeSearchContainer extends React.Component {
+export class RecipeSearchContainer extends React.Component {
   state = {
     value: ""
   };
