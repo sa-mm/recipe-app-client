@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import Login from "./Login";
-import { login } from "../../actions/login";
+import { login } from "../../store/actions/login";
 
 const mapStateToProps = ({ session }) => ({ session });
 const mapDispatchToProps = { login };

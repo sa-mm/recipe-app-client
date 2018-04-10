@@ -4,7 +4,11 @@ import RecipeSearch from "./RecipeSearch";
 import RecipeList from "./RecipeList";
 
 import { connect } from "react-redux";
-import { addRecipe, searchRecipe, additionalRecipes } from "../../actions";
+import {
+  addRecipe,
+  searchRecipe,
+  additionalRecipes
+} from "../../store/actions";
 
 import { withRouter } from "react-router";
 import { compose } from "redux";

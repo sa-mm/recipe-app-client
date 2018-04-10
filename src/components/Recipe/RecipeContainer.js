@@ -10,7 +10,7 @@ import {
   deleteNoteFromRecipe,
   addGroceryItem,
   removeGroceryItem
-} from "../../actions";
+} from "../../store/actions";
 
 import { connect } from "react-redux";
 
@@ -59,7 +59,7 @@ export class RecipeContainer extends React.Component {
       notes = item.notes || [];
       isInCollection = true;
     } else {
-      recipe = recipes[recipeId];
+      recipe = recipes[recipeId] || Object.values(recipes)[0];
     }
 
     this.setState({

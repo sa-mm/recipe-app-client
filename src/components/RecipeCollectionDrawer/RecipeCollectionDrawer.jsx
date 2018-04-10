@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { compose } from "redux";
 
-import { removeGroceryItem } from "../../actions";
+import { removeGroceryItem } from "../../store/actions";
 const mapState = ({ recipeCollection, groceryList }) => ({
   recipeCollection,
   groceryList

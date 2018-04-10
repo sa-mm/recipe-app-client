@@ -19,7 +19,7 @@ import {
 import thunk from "redux-thunk";
 import loggingMiddleware from "./store/middleware/loggingMiddleware";
 
-import reducers from "./reducers"; // Or wherever you keep your reducers
+import reducers from "./store/reducers"; // Or wherever you keep your reducers
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import injectTapEventPlugin from "react-tap-event-plugin";
