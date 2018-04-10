@@ -27,7 +27,8 @@ class ActionsContainer extends React.Component {
 ActionsContainer.propTypes = {
   handleAddToCollectionClick: PropTypes.func.isRequired,
   handleRemoveFromCollectionClick: PropTypes.func.isRequired,
-  isInCollection: PropTypes.bool.isRequired
+  isInCollection: PropTypes.bool.isRequired,
+  handleAddNoteClick: PropTypes.func.isRequired
 };
 
 export default ActionsContainer;
