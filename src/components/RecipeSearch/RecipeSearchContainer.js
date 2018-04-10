@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import RecipeSearch from "./RecipeSearch";
 import RecipeList from "./RecipeList";
 
@@ -36,7 +37,7 @@ class RecipeSearchContainer extends React.Component {
   handleRecipeClick = (recipeId, recipe) => event => {
     this.props.addRecipe(recipeId, recipe);
     this.props.history.push({
-      pathname: `recipe/${recipeId}`,
+      pathname: `/recipe/${recipeId}`,
       state: { recipe }
     });
   };
@@ -61,6 +62,16 @@ class RecipeSearchContainer extends React.Component {
     );
   }
 }
+
+RecipeSearchContainer.propTypes = {
+  search: PropTypes.shape({
+    results: PropTypes.array,
+    meta: PropTypes.object
+  }),
+  additionalRecipes: PropTypes.func.isRequired,
+  searchRecipe: PropTypes.func.isRequired,
+  addRecipe: PropTypes.func.isRequired
+};
 
 export default compose(
   withRouter,

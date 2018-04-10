@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Card, CardMedia, CardTitle, CardText } from "material-ui/Card";
 
@@ -34,6 +35,13 @@ const RecipeList = props => {
       {/* </div> */}
     </div>
   );
+};
+
+RecipeList.propTypes = {
+  results: PropTypes.array.isRequired,
+  meta: PropTypes.object.isRequired,
+  handleRecipeClick: PropTypes.func.isRequired,
+  handleMoreClick: PropTypes.func.isRequired
 };
 
 export default RecipeList;
