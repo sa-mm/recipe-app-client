@@ -17,6 +17,7 @@ import {
 } from "react-router-redux";
 
 import thunk from "redux-thunk";
+import loggingMiddleware from "./store/middleware/loggingMiddleware";
 
 import reducers from "./reducers"; // Or wherever you keep your reducers
 
@@ -42,7 +43,7 @@ const store = createStore(
     ...reducers,
     router: routerReducer
   }),
-  composeEnhancers(applyMiddleware(middleware, thunk))
+  composeEnhancers(applyMiddleware(middleware, thunk, loggingMiddleware))
 );
 
 ReactDOM.render(

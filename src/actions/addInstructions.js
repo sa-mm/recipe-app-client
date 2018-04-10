@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { addInstructionsToCollectionRecipe } from "./index";
+
 export const ADD_INSTRUCTIONS_SUCCESS = "ADD_INSTRUCTIONS_SUCCESS";
 export const ADD_INSTRUCTIONS_FAILURE = "ADD_INSTRUCTIONS_FAILURE";
 
@@ -23,7 +25,8 @@ const addInstructionsFailure = (status, msg) => {
 };
 
 export const getInstructions = (url, recipeId) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { recipeCollection } = getState();
     axios({
       method: "post",
       url: "/api/recipe_instructions",
@@ -34,6 +37,10 @@ export const getInstructions = (url, recipeId) => {
       .then(({ data }) => {
         const { instructions } = data;
         dispatch(addInstructions(recipeId, instructions));
+
+        if (recipeCollection.some(e => e.id === recipeId)) {
+          dispatch(addInstructionsToCollectionRecipe(recipeId, instructions));
+        }
       })
       .catch(({ response }) => {
         const { status, data: { error } } = response;

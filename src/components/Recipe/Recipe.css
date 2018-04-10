@@ -1,11 +1,19 @@
 .Recipe {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 40px;
-  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    justify-content: center;
+    counter-reset: step;
 }
 
 .item {
-  margin: 10px;
-  max-width: 300px;
+    margin: 10px;
+    max-width: 300px;
+}
+
+.step::before {
+    position: relative;
+    top: 32px;
+    counter-increment: section;
+    content: counter(section);
 }

@@ -33,11 +33,12 @@ class MyAppBar extends React.Component {
   };
 
   render() {
-    const { session: { isLoggedIn } } = this.props;
+    const { session: { isLoggedIn }, handleMenuClick } = this.props;
     return (
       <AppBar
         title="Recipe App"
         onTitleClick={this.handleTitleClick}
+        onLeftIconButtonClick={handleMenuClick}
         iconElementRight={<MyNavLinks isLoggedIn={isLoggedIn} />}
       />
     );

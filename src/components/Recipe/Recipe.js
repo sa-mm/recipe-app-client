@@ -1,25 +1,80 @@
 import React from "react";
 import "./Recipe.css";
 import { Card, CardMedia, CardTitle } from "material-ui/Card";
+
+import { List, ListItem } from "material-ui/List";
+
+import { Paper, Divider, Checkbox, Subheader, FlatButton } from "material-ui";
+
+import Actions from "../Actions";
+import RecipeNotes from "./RecipeNotes";
+
 const Recipe = props => {
-  const { label, ingredients, handleStepsClick, instructions, image } = props;
+  const {
+    label,
+    ingredients,
+    handleStepsClick,
+    instructions,
+    image,
+    handleAddToCollectionClick,
+    handleRemoveFromCollectionClick,
+    isInCollection,
+    handleAddNoteClick,
+    notes,
+    newNote,
+    handleNoteChange,
+    handleAddNoteToRecipe,
+    handleDeleteNoteClick,
+    handleIngredientCheck,
+    recipeId,
+    groceryList
+  } = props;
+
+  const checkGroceryList = (id, list) => {
+    return list.some(e => e.id === id);
+  };
 
   return (
     <div className="Recipe">
       <div className="item">
-        <div>Ingredients:</div>
-        <ul>
-          {ingredients.map(({ text }, i) => {
-            return <li key={`ingredient-${i}`}>{text}</li>;
-          })}
-        </ul>
-        If you want to see the prepartion steps, please click{" "}
-        <button onClick={handleStepsClick}>here</button>.
-        <ol>
-          {instructions.map((step, i) => {
-            return <li key={`step-${i}`}>{step}</li>;
-          })}
-        </ol>
+        <Paper>
+          <List>
+            <Subheader>Ingredients</Subheader>
+            {ingredients.map(({ text }, i) => {
+              return (
+                <ListItem
+                  key={text + recipeId}
+                  leftCheckbox={
+                    <Checkbox
+                      onCheck={handleIngredientCheck(text)}
+                      checked={checkGroceryList(text + recipeId, groceryList)}
+                    />
+                  }
+                >
+                  {text}
+                </ListItem>
+              );
+            })}
+          </List>
+          <Divider />
+          {instructions ? (
+            <List>
+              <Subheader>Preparation steps</Subheader>
+              {instructions.map((step, i) => {
+                return (
+                  <ListItem
+                    key={`step-${i}`}
+                    primaryText={`${i + 1}. ${step}`}
+                  />
+                );
+              })}
+            </List>
+          ) : (
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <FlatButton label="Reveal Steps" onClick={handleStepsClick} />
+            </div>
+          )}
+        </Paper>
       </div>
       <div className="item">
         <Card>
@@ -27,6 +82,27 @@ const Recipe = props => {
             <img src={image} alt={label} />
           </CardMedia>
         </Card>
+        <Paper>
+          <Actions
+            {...{
+              handleAddToCollectionClick,
+              handleRemoveFromCollectionClick,
+              isInCollection,
+              handleAddNoteClick
+            }}
+          />
+        </Paper>
+        {isInCollection && (
+          <RecipeNotes
+            {...{
+              notes,
+              newNote,
+              handleNoteChange,
+              handleAddNoteToRecipe,
+              handleDeleteNoteClick
+            }}
+          />
+        )}
       </div>
     </div>
   );

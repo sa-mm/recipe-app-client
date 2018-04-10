@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import RecipeSearch from "../RecipeSearch";
 import Recipe from "../Recipe";
 import Login from "../Login";
+import Profile from "../Profile";
 
 const Main = props => {
   return (
@@ -11,6 +12,7 @@ const Main = props => {
       <Route exact path="/" component={RecipeSearch} />
       <Route path="/recipe/:recipeId" component={Recipe} />
       <Route path="/login" component={Login} />
+      <Route path="/profile" component={Profile} />
     </Switch>
   );
 };
