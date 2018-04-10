@@ -1,8 +1,8 @@
 import React from "react";
+import App from "./App";
 import { shallow } from "enzyme";
-import Main from "./Main";
 
-it("Main smoke test", () => {
-  const wrapper = shallow(<Main />);
+it("App smoke test", () => {
+  const wrapper = shallow(<App />);
   expect(wrapper).toHaveLength(1);
 });
