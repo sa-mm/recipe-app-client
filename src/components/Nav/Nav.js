@@ -18,16 +18,6 @@ const MyNavLinks = ({ isLoggedIn }) => (
 const mapStateToProps = ({ session }) => ({ session });
 
 class MyAppBar extends React.Component {
-  static propTypes = {
-    history: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-      replace: PropTypes.func.isRequired
-    }).isRequired,
-    session: PropTypes.shape({
-      isLoggedIn: PropTypes.bool.isRequired
-    }).isRequired
-  };
-
   handleTitleClick = () => {
     this.props.history.push("/");
   };
@@ -44,5 +34,15 @@ class MyAppBar extends React.Component {
     );
   }
 }
+
+MyAppBar.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+    replace: PropTypes.func.isRequired
+  }).isRequired,
+  session: PropTypes.shape({
+    isLoggedIn: PropTypes.bool.isRequired
+  }).isRequired
+};
 
 export default compose(withRouter, connect(mapStateToProps))(MyAppBar);
