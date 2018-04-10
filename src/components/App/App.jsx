@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Nav from "../Nav";
 import Main from "../Main";
-import RecipeCollectionDrawer from "../RecipeCollectionDrawer";
+import RecipeAppDrawer from "../RecipeAppDrawer";
 
 class App extends Component {
   state = {
@@ -21,7 +21,7 @@ class App extends Component {
       <div>
         <Nav handleMenuClick={this.handleMenuClick} />
 
-        <RecipeCollectionDrawer
+        <RecipeAppDrawer
           drawerOpen={this.state.drawerOpen}
           handleMenuClick={this.handleMenuClick}
         />

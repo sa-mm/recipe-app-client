@@ -6,7 +6,7 @@ import "./RecipeNotes.css";
 
 const RecipeNotes = props => {
   const {
-    notes = ["This is a note about the recipe."],
+    notes,
     handleNoteChange,
     handleAddNoteToRecipe,
     handleDeleteNoteClick

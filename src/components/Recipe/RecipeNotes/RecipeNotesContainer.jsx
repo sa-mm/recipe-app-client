@@ -12,6 +12,8 @@ class RecipeNotesContainer extends React.Component {
       handleAddNoteToRecipe,
       handleDeleteNoteClick
     } = this.props;
+
+    if (notes.length === 0) return null;
     return (
       <RecipeNotes
         {...{

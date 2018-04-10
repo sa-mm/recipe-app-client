@@ -1,22 +1,23 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Drawer, MenuItem, Subheader, Divider, Checkbox } from "material-ui";
-import { ListItem } from "material-ui/List";
+import { Drawer, MenuItem, Subheader } from "material-ui";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { compose } from "redux";
 
-import { removeGroceryItem } from "../../store/actions";
+import { completeGroceryItem } from "../../store/actions";
+import GroceryList from "../GroceryList";
+
 const mapState = ({ recipeCollection, groceryList }) => ({
   recipeCollection,
   groceryList
 });
 
-const mapDispatch = { removeGroceryItem };
+const mapDispatch = { completeGroceryItem };
 
-export class RecipeCollectionDrawer extends React.Component {
+export class RecipeAppDrawer extends React.Component {
   handleItemClick = (recipe, recipeId) => event => {
     const { handleMenuClick, history } = this.props;
     history.push({
@@ -27,7 +28,7 @@ export class RecipeCollectionDrawer extends React.Component {
   };
 
   handleGroceryItemCheck = (recipeId, item) => event => {
-    this.props.removeGroceryItem(recipeId, item);
+    this.props.completeGroceryItem(recipeId, item);
   };
 
   render() {
@@ -44,27 +45,10 @@ export class RecipeCollectionDrawer extends React.Component {
         docked={false}
         onRequestChange={handleMenuClick}
       >
-        {groceryList.length > 0 && (
-          <div>
-            <Subheader>Grocery List</Subheader>
-            {groceryList.map(({ item, id, recipeId }) => {
-              return (
-                <ListItem
-                  key={id}
-                  leftCheckbox={
-                    <Checkbox
-                      checked
-                      onCheck={this.handleGroceryItemCheck(recipeId, item)}
-                    />
-                  }
-                >
-                  {item}
-                </ListItem>
-              );
-            })}
-            <Divider />
-          </div>
-        )}
+        <GroceryList
+          {...{ groceryList }}
+          handleGroceryItemCheck={this.handleGroceryItemCheck}
+        />
         <Subheader>Recipe Collection</Subheader>
         {recipeCollection.map(({ recipe, id }) => {
           return (
@@ -78,7 +62,7 @@ export class RecipeCollectionDrawer extends React.Component {
   }
 }
 
-RecipeCollectionDrawer.propTypes = {
+RecipeAppDrawer.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
   handleMenuClick: PropTypes.func.isRequired,
   recipeCollection: PropTypes.arrayOf(
@@ -87,7 +71,7 @@ RecipeCollectionDrawer.propTypes = {
       id: PropTypes.string.isRequired
     })
   ).isRequired,
-  removeGroceryItem: PropTypes.func.isRequired,
+  completeGroceryItem: PropTypes.func.isRequired,
   groceryList: PropTypes.arrayOf(
     PropTypes.shape({
       item: PropTypes.string.isRequired,
@@ -98,5 +82,5 @@ RecipeCollectionDrawer.propTypes = {
 };
 
 export default compose(withRouter, connect(mapState, mapDispatch))(
-  RecipeCollectionDrawer
+  RecipeAppDrawer
 );

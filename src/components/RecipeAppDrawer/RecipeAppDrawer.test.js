@@ -1,16 +1,16 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { RecipeCollectionDrawer } from "./RecipeCollectionDrawer";
+import { RecipeAppDrawer } from "./RecipeAppDrawer";
 
 const mockProps = {
   drawerOpen: false,
   handleMenuClick: jest.fn(),
   recipeCollection: [],
-  removeGroceryItem: jest.fn(),
+  completeGroceryItem: jest.fn(),
   groceryList: []
 };
 
-it("RecipeCollectionDrawer smoke test", () => {
-  const wrapper = shallow(<RecipeCollectionDrawer {...mockProps} />);
+it("RecipeAppDrawer smoke test", () => {
+  const wrapper = shallow(<RecipeAppDrawer {...mockProps} />);
   expect(wrapper).toHaveLength(1);
 });

@@ -8,4 +8,8 @@ export {
   addNoteToRecipe,
   deleteNoteFromRecipe
 } from "./collectionActions";
-export { addGroceryItem, removeGroceryItem } from "./groceryListActions";
+export {
+  addGroceryItem,
+  removeGroceryItem,
+  completeGroceryItem
+} from "./groceryListActions";
