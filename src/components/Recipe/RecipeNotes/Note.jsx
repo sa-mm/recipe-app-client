@@ -51,7 +51,8 @@ Note.propTypes = {
   value: PropTypes.string,
   handleNoteChange: PropTypes.func.isRequired,
   handleAddNoteToRecipe: PropTypes.func.isRequired,
-  hasDrag: PropTypes.bool.isRequired
+  hasDrag: PropTypes.bool.isRequired,
+  handleDeleteNoteClick: PropTypes.func.isRequired
 };
 
 export default Note;

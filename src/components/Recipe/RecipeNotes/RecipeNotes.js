@@ -7,11 +7,11 @@ import "./RecipeNotes.css";
 const RecipeNotes = props => {
   const {
     notes = ["This is a note about the recipe."],
-    newNote,
     handleNoteChange,
     handleAddNoteToRecipe,
     handleDeleteNoteClick
   } = props;
+
   return (
     <Paper>
       <div className="RecipeNotes">

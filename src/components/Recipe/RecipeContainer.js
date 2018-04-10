@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Recipe from "./Recipe";
 
 import {
@@ -178,5 +179,18 @@ class RecipeContainer extends React.Component {
     );
   }
 }
+
+RecipeContainer.propTypes = {
+  recipes: PropTypes.object.isRequired,
+  recipeCollection: PropTypes.array.isRequired,
+  groceryList: PropTypes.array.isRequired,
+  getInstructions: PropTypes.func.isRequired,
+  addToCollection: PropTypes.func.isRequired,
+  removeFromCollection: PropTypes.func.isRequired,
+  addNoteToRecipe: PropTypes.func.isRequired,
+  deleteNoteFromRecipe: PropTypes.func.isRequired,
+  addGroceryItem: PropTypes.func.isRequired,
+  removeGroceryItem: PropTypes.func.isRequired
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeContainer);

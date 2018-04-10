@@ -27,7 +27,11 @@ class RecipeNotesContainer extends React.Component {
 }
 
 RecipeNotesContainer.propTypes = {
-  notes: PropTypes.array.isRequired
+  notes: PropTypes.array.isRequired,
+  newNote: PropTypes.bool.isRequired,
+  handleNoteChange: PropTypes.func.isRequired,
+  handleAddNoteToRecipe: PropTypes.func.isRequired,
+  handleDeleteNoteClick: PropTypes.func.isRequired
 };
 
 export default RecipeNotesContainer;

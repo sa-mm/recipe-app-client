@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./Recipe.css";
 import { Card, CardMedia, CardTitle } from "material-ui/Card";
 
@@ -106,6 +107,26 @@ const Recipe = props => {
       </div>
     </div>
   );
+};
+
+Recipe.propTypes = {
+  label: PropTypes.string.isRequired,
+  ingredients: PropTypes.array.isRequired,
+  handleStepsClick: PropTypes.func.isRequired,
+  instructions: PropTypes.array.isRequired,
+  image: PropTypes.string.isRequired,
+  handleAddToCollectionClick: PropTypes.func.isRequired,
+  handleRemoveFromCollectionClick: PropTypes.func.isRequired,
+  isInCollection: PropTypes.bool.isRequired,
+  handleAddNoteClick: PropTypes.func.isRequired,
+  notes: PropTypes.array.isRequired,
+  newNote: PropTypes.bool.isRequired,
+  handleNoteChange: PropTypes.func.isRequired,
+  handleAddNoteToRecipe: PropTypes.func.isRequired,
+  handleDeleteNoteClick: PropTypes.func.isRequired,
+  handleIngredientCheck: PropTypes.func.isRequired,
+  recipeId: PropTypes.string.isRequired,
+  groceryList: PropTypes.array.isRequired
 };
 
 export default Recipe;

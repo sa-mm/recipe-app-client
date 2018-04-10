@@ -1,5 +1,3 @@
-import { ADD_INSTRUCTIONS_FAILURE } from "../actions/addInstructions";
-
 const errorReducer = (state = {}, action) => {
   const { type, payload, meta, error } = action;
   if (error) {
