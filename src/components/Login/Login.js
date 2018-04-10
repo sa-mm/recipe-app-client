@@ -9,11 +9,11 @@ const containerStyle = {
 };
 
 const loginStyle = {
-  padding: "10px",
+  padding: "20px",
   width: "300px"
 };
 
-const formStyle = {};
+const formStyle = { display: "flex", flexDirection: "column" };
 
 const Login = props => {
   const { handleSubmit, handleChange, email, password } = props;
@@ -23,7 +23,12 @@ const Login = props => {
         <form onSubmit={handleSubmit} style={formStyle}>
           <label>
             Email:
-            <TextField value={email} onChange={handleChange} name="email" />
+            <TextField
+              value={email}
+              onChange={handleChange}
+              name="email"
+              style={{ width: "100%" }}
+            />
           </label>
           <label>
             Password:
@@ -32,9 +37,14 @@ const Login = props => {
               type="password"
               onChange={handleChange}
               name="password"
+              style={{ width: "100%" }}
             />
           </label>
-          <RaisedButton type="submit" label="Submit" />
+          <RaisedButton
+            type="submit"
+            label="Submit"
+            style={{ marginTop: "20px" }}
+          />
         </form>
       </Paper>
     </div>
@@ -45,7 +55,8 @@ Login.propTypes = {
   handleChange: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
+  password: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 };
 
 export default Login;
