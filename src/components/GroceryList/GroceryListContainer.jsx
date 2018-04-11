@@ -1,13 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 import GroceryList from "./GroceryList";
+import { connect } from "react-redux";
+import { compose } from "redux";
+import { completeGroceryItem } from "../../store/actions";
+import { withRouter } from "react-router";
+
+const mapState = ({ groceryList }) => ({ groceryList });
+const mapDispatch = { completeGroceryItem };
 
 class GroceryListContainer extends React.Component {
+  handleRouteBtnClick = event => {
+    this.props.history.push("/list");
+  };
+  handleGroceryItemCheck = (recipeId, item) => event => {
+    this.props.completeGroceryItem(recipeId, item);
+  };
+
   render() {
-    const { groceryList, handleGroceryItemCheck } = this.props;
+    const { groceryList, hasRouteBtn } = this.props;
     return (
       groceryList.length > 0 && (
-        <GroceryList {...{ groceryList, handleGroceryItemCheck }} />
+        <GroceryList
+          {...{ groceryList, hasRouteBtn }}
+          handleRouteBtnClick={this.handleRouteBtnClick}
+          handleGroceryItemCheck={this.handleGroceryItemCheck}
+        />
       )
     );
   }
@@ -21,7 +39,10 @@ GroceryListContainer.propTypes = {
       recipeId: PropTypes.string.isRequired
     })
   ).isRequired,
-  handleGroceryItemCheck: PropTypes.func.isRequired
+  hasRouteBtn: PropTypes.bool,
+  history: PropTypes.object.isRequired
 };
 
-export default GroceryListContainer;
+export default compose(withRouter, connect(mapState, mapDispatch))(
+  GroceryListContainer
+);

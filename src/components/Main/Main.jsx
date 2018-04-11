@@ -5,6 +5,7 @@ import RecipeSearch from "../RecipeSearch";
 import Recipe from "../Recipe";
 import Login from "../Login";
 import Profile from "../Profile";
+import GroceryListRoute from "../GroceryListRoute";
 
 const Main = props => {
   return (
@@ -13,6 +14,7 @@ const Main = props => {
       <Route path="/recipe/:recipeId" component={Recipe} />
       <Route path="/login" component={Login} />
       <Route path="/profile" component={Profile} />
+      <Route path="/list" component={GroceryListRoute} />
     </Switch>
   );
 };

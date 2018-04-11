@@ -1,30 +1,60 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Subheader, Checkbox, Divider } from "material-ui";
-import { ListItem } from "material-ui/List";
+import { Subheader, Checkbox, Divider, IconButton } from "material-ui";
+import { List, ListItem } from "material-ui/List";
+import ArrowForward from "material-ui/svg-icons/navigation/arrow-forward";
+
+const smallIcon = {
+  width: "16px",
+  height: "16px"
+};
+
+const buttonStyle = {
+  width: "20px",
+  height: "20px",
+  padding: "0px"
+};
 
 const GroceryList = props => {
-  const { groceryList, handleGroceryItemCheck } = props;
+  const {
+    groceryList,
+    handleGroceryItemCheck,
+    hasRouteBtn,
+    handleRouteBtnClick
+  } = props;
   return (
     <div>
-      <Subheader>Grocery List</Subheader>
-      {groceryList.map(({ item, id, recipeId, completed }) => {
-        return (
-          <ListItem
-            key={id}
-            leftCheckbox={
-              <Checkbox
-                checked={completed}
-                onCheck={handleGroceryItemCheck(recipeId, item)}
-              />
-            }
-            style={{ textDecoration: completed ? "line-through" : "none" }}
-          >
-            {item}
-          </ListItem>
-        );
-      })}
+      <List style={{ display: "flex", justifyContent: "center" }}>
+        <Subheader>
+          Grocery List{" "}
+          {hasRouteBtn && (
+            <IconButton
+              iconStyle={smallIcon}
+              style={buttonStyle}
+              onClick={handleRouteBtnClick}
+            >
+              <ArrowForward />
+            </IconButton>
+          )}
+        </Subheader>
+        {groceryList.map(({ item, id, recipeId, completed }) => {
+          return (
+            <ListItem
+              key={id}
+              leftCheckbox={
+                <Checkbox
+                  checked={completed}
+                  onCheck={handleGroceryItemCheck(recipeId, item)}
+                />
+              }
+              style={{ textDecoration: completed ? "line-through" : "none" }}
+            >
+              {item}
+            </ListItem>
+          );
+        })}
+      </List>
       <Divider />
     </div>
   );
@@ -38,7 +68,9 @@ GroceryList.propTypes = {
       recipeId: PropTypes.string.isRequired
     })
   ).isRequired,
-  handleGroceryItemCheck: PropTypes.func.isRequired
+  handleGroceryItemCheck: PropTypes.func.isRequired,
+  hasRouteBtn: PropTypes.bool,
+  handleRouteBtnClick: PropTypes.func.isRequired
 };
 
 export default GroceryList;

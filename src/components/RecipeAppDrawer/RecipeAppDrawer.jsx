@@ -48,6 +48,7 @@ export class RecipeAppDrawer extends React.Component {
         <GroceryList
           {...{ groceryList }}
           handleGroceryItemCheck={this.handleGroceryItemCheck}
+          hasRouteBtn={true}
         />
         <Subheader>Recipe Collection</Subheader>
         {recipeCollection.map(({ recipe, id }) => {
