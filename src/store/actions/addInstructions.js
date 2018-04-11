@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axiosInstance } from "../../utils/api";
 
 import { addInstructionsToCollectionRecipe } from "./index";
 
@@ -27,7 +27,7 @@ const addInstructionsFailure = (status, msg) => {
 export const getInstructions = (url, recipeId) => {
   return (dispatch, getState) => {
     const { recipeCollection } = getState();
-    axios({
+    axiosInstance({
       method: "post",
       url: "/api/recipe_instructions",
       data: {
