@@ -7,6 +7,7 @@ import {
   addToCollection,
   removeFromCollection,
   addNoteToRecipe,
+  changeNoteValue,
   deleteNoteFromRecipe,
   addGroceryItem,
   removeGroceryItem
@@ -25,6 +26,7 @@ const mapDispatchToProps = {
   addToCollection,
   removeFromCollection,
   addNoteToRecipe,
+  changeNoteValue,
   deleteNoteFromRecipe,
   addGroceryItem,
   removeGroceryItem
@@ -35,7 +37,8 @@ export class RecipeContainer extends React.Component {
     recipe: {},
     newNote: false,
     notes: [],
-    isInCollection: null
+    isInCollection: null,
+    notesCounter: 0
   };
 
   componentWillMount() {
@@ -53,11 +56,13 @@ export class RecipeContainer extends React.Component {
     let recipe;
     let notes = [];
     let isInCollection = false;
+    let notesCounter = 0;
     if (recipeCollection.some(recipe => recipe.id === recipeId)) {
       const item = recipeCollection.find(e => e.id === recipeId);
       recipe = item.recipe;
-      notes = item.notes || [];
+      notes = item.notes || this.state.notes;
       isInCollection = true;
+      notesCounter = item.notesCounter;
     } else {
       recipe = recipes[recipeId] || Object.values(recipes)[0];
     }
@@ -65,7 +70,8 @@ export class RecipeContainer extends React.Component {
     this.setState({
       recipe,
       notes,
-      isInCollection
+      isInCollection,
+      notesCounter
     });
   }
 
@@ -85,43 +91,16 @@ export class RecipeContainer extends React.Component {
     this.props.removeFromCollection(id);
   };
 
-  handleAddNoteToRecipe = recipeId => idx => value => e => {
-    // const { currentTarget: { value } } = e;
-    this.props.addNoteToRecipe(recipeId, idx, value);
-  };
-
   handleAddNoteClick = id => event => {
-    this.setState(prevState => {
-      return {
-        newNote: true,
-        notes: [...prevState.notes, undefined]
-      };
-    });
+    this.props.addNoteToRecipe(id);
   };
 
-  handleDeleteNoteClick = recipeId => idx => event => {
-    this.setState(prevState => {
-      return {
-        notes: prevState.notes.filter((e, i) => i !== idx)
-      };
-    }, this.deleteNoteFromRecipe(recipeId, idx));
+  handleDeleteNoteClick = recipeId => noteId => event => {
+    this.props.deleteNoteFromRecipe(recipeId, noteId);
   };
 
-  deleteNoteFromRecipe = (recipeId, idx) => {
-    const { recipeCollection } = this.props;
-    if (recipeCollection.some(recipe => recipe.id === recipeId)) {
-      this.props.deleteNoteFromRecipe(recipeId, idx);
-    }
-  };
-
-  handleNoteChange = idx => ({ currentTarget: { value } }) => {
-    this.setState(prevState => {
-      const { notes } = prevState;
-      notes[idx] = value;
-      return {
-        notes: [...notes]
-      };
-    });
+  handleNoteChange = id => noteId => ({ currentTarget: { value } }) => {
+    this.props.changeNoteValue(id, noteId, value);
   };
 
   handleIngredientCheck = id => item => e => {
@@ -171,8 +150,7 @@ export class RecipeContainer extends React.Component {
           recipeId
         )}
         handleAddNoteClick={this.handleAddNoteClick(recipeId)}
-        handleNoteChange={this.handleNoteChange}
-        handleAddNoteToRecipe={this.handleAddNoteToRecipe(recipeId)}
+        handleNoteChange={this.handleNoteChange(recipeId)}
         handleDeleteNoteClick={this.handleDeleteNoteClick(recipeId)}
         handleIngredientCheck={this.handleIngredientCheck(recipeId)}
       />

@@ -24,7 +24,6 @@ const Recipe = props => {
     notes,
     newNote,
     handleNoteChange,
-    handleAddNoteToRecipe,
     handleDeleteNoteClick,
     handleIngredientCheck,
     recipeId,
@@ -99,7 +98,6 @@ const Recipe = props => {
               notes,
               newNote,
               handleNoteChange,
-              handleAddNoteToRecipe,
               handleDeleteNoteClick
             }}
           />
@@ -122,7 +120,6 @@ Recipe.propTypes = {
   notes: PropTypes.array.isRequired,
   newNote: PropTypes.bool.isRequired,
   handleNoteChange: PropTypes.func.isRequired,
-  handleAddNoteToRecipe: PropTypes.func.isRequired,
   handleDeleteNoteClick: PropTypes.func.isRequired,
   handleIngredientCheck: PropTypes.func.isRequired,
   recipeId: PropTypes.string.isRequired,

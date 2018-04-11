@@ -9,7 +9,6 @@ class RecipeNotesContainer extends React.Component {
       notes,
       newNote,
       handleNoteChange,
-      handleAddNoteToRecipe,
       handleDeleteNoteClick
     } = this.props;
 
@@ -20,7 +19,6 @@ class RecipeNotesContainer extends React.Component {
           notes,
           newNote,
           handleNoteChange,
-          handleAddNoteToRecipe,
           handleDeleteNoteClick
         }}
       />
@@ -32,7 +30,6 @@ RecipeNotesContainer.propTypes = {
   notes: PropTypes.array.isRequired,
   newNote: PropTypes.bool.isRequired,
   handleNoteChange: PropTypes.func.isRequired,
-  handleAddNoteToRecipe: PropTypes.func.isRequired,
   handleDeleteNoteClick: PropTypes.func.isRequired
 };
 

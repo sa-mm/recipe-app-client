@@ -6,6 +6,7 @@ export {
   removeFromCollection,
   addInstructionsToCollectionRecipe,
   addNoteToRecipe,
+  changeNoteValue,
   deleteNoteFromRecipe
 } from "./collectionActions";
 export {

@@ -4,6 +4,7 @@ export const REMOVE_RECIPE_FROM_COLLECTION = "REMOVE_RECIPE_FROM_COLLECTION";
 export const ADD_INSTRUCTIONS_TO_RECIPE = "ADD_INSTRUCTIONS_TO_RECIPE";
 
 export const ADD_NOTE_TO_RECIPE = "ADD_NOTE_TO_RECIPE";
+export const CHANGE_NOTE_VALUE = "CHANGE_NOTE_VALUE";
 export const DELETE_NOTE_FROM_RECIPE = "DELETE_NOTE_FROM_RECIPE";
 
 export const addToCollection = (id, recipe) => {
@@ -30,23 +31,34 @@ export const addInstructionsToCollectionRecipe = (id, instructions) => {
   };
 };
 
-export const addNoteToRecipe = (id, idx, note) => {
+export const addNoteToRecipe = (id, noteId, text) => {
   return {
     type: ADD_NOTE_TO_RECIPE,
     payload: {
       id,
-      idx,
-      note
+      noteId,
+      text
     }
   };
 };
 
-export const deleteNoteFromRecipe = (id, idx) => {
+export const changeNoteValue = (id, noteId, text) => {
+  return {
+    type: CHANGE_NOTE_VALUE,
+    payload: {
+      id,
+      noteId,
+      text
+    }
+  };
+};
+
+export const deleteNoteFromRecipe = (id, noteId) => {
   return {
     type: DELETE_NOTE_FROM_RECIPE,
     payload: {
       id,
-      idx
+      noteId
     }
   };
 };

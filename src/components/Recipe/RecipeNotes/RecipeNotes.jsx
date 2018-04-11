@@ -5,25 +5,19 @@ import { Paper, Subheader } from "material-ui";
 import "./RecipeNotes.css";
 
 const RecipeNotes = props => {
-  const {
-    notes,
-    handleNoteChange,
-    handleAddNoteToRecipe,
-    handleDeleteNoteClick
-  } = props;
+  const { notes, handleNoteChange, handleDeleteNoteClick } = props;
 
   return (
     <Paper>
       <div className="RecipeNotes">
         <Subheader>Recipe Notes</Subheader>
-        {notes.map((note, i) => {
+        {notes.map(({ noteId, text = "" }) => {
           return (
             <Note
-              key={i}
-              value={note}
-              handleNoteChange={handleNoteChange(i)}
-              handleAddNoteToRecipe={handleAddNoteToRecipe(i)}
-              handleDeleteNoteClick={handleDeleteNoteClick(i)}
+              key={noteId}
+              value={text}
+              handleNoteChange={handleNoteChange(noteId)}
+              handleDeleteNoteClick={handleDeleteNoteClick(noteId)}
             />
           );
         })}
@@ -35,8 +29,7 @@ const RecipeNotes = props => {
 RecipeNotes.propTypes = {
   notes: PropTypes.array.isRequired,
   newNote: PropTypes.bool.isRequired,
-  handleNoteChange: PropTypes.func.isRequired,
-  handleAddNoteToRecipe: PropTypes.func.isRequired
+  handleNoteChange: PropTypes.func.isRequired
 };
 
 export default RecipeNotes;
