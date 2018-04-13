@@ -5,6 +5,8 @@ import { Subheader, Checkbox, Divider, IconButton } from "material-ui";
 import { List, ListItem } from "material-ui/List";
 import ArrowForward from "material-ui/svg-icons/navigation/arrow-forward";
 
+import "./GroceryList.css";
+
 const smallIcon = {
   width: "16px",
   height: "16px"
@@ -25,7 +27,7 @@ const GroceryList = props => {
   } = props;
   return (
     <div>
-      <List style={{ display: "flex", justifyContent: "center" }}>
+      <List className="GroceryList">
         <Subheader>
           Grocery List{" "}
           {hasRouteBtn && (

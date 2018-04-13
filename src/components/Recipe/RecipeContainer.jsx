@@ -87,13 +87,6 @@ export class RecipeContainer extends React.Component {
     });
   }
 
-  cbCheck = () => {
-    const { history: { location: { state = {} } } } = this.props;
-    if (state.callback) {
-      state.callback();
-    }
-  };
-
   handleStepsClick = event => {
     const { match, recipes, getInstructions } = this.props;
     const { recipeId } = match.params;
@@ -134,12 +127,21 @@ export class RecipeContainer extends React.Component {
 
   handleIngredientCheck = id => item => e => {
     const { currentTarget: { checked } } = e;
-    const { addGroceryItem, removeGroceryItem } = this.props;
+    const {
+      session: { isAuthenticated },
+      addGroceryItem,
+      removeGroceryItem,
+      auth0Login
+    } = this.props;
 
-    if (checked) {
-      addGroceryItem(id, item);
+    if (isAuthenticated) {
+      if (checked) {
+        addGroceryItem(id, item);
+      } else {
+        removeGroceryItem(id, item);
+      }
     } else {
-      removeGroceryItem(id, item);
+      auth0Login();
     }
   };
 
