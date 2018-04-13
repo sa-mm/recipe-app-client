@@ -111,7 +111,7 @@ Recipe.propTypes = {
   label: PropTypes.string.isRequired,
   ingredients: PropTypes.array.isRequired,
   handleStepsClick: PropTypes.func.isRequired,
-  instructions: PropTypes.array.isRequired,
+  instructions: PropTypes.array,
   image: PropTypes.string.isRequired,
   handleAddToCollectionClick: PropTypes.func.isRequired,
   handleRemoveFromCollectionClick: PropTypes.func.isRequired,

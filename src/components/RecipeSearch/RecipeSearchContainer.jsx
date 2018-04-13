@@ -10,9 +10,6 @@ import {
   additionalRecipes
 } from "../../store/actions";
 
-import { withRouter } from "react-router";
-import { compose } from "redux";
-
 const mapStateToProps = ({ search }) => ({ search });
 const mapDispatchToProps = {
   additionalRecipes,
@@ -77,7 +74,6 @@ RecipeSearchContainer.propTypes = {
   addRecipe: PropTypes.func.isRequired
 };
 
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
-)(RecipeSearchContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  RecipeSearchContainer
+);

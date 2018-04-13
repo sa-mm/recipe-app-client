@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Recipe from "./Recipe";
+import { negroni } from "../../data/mockRecipeWithInstructions";
+
+import { connect } from "react-redux";
 
 import {
   getInstructions,
@@ -10,16 +13,20 @@ import {
   changeNoteValue,
   deleteNoteFromRecipe,
   addGroceryItem,
-  removeGroceryItem
+  removeGroceryItem,
+  auth0Login
 } from "../../store/actions";
 
-import { connect } from "react-redux";
-
-import { negroni } from "../../data/mockRecipeWithInstructions";
-const mapStateToProps = ({ recipes, recipeCollection, groceryList }) => ({
+const mapStateToProps = ({
   recipes,
   recipeCollection,
-  groceryList
+  groceryList,
+  session
+}) => ({
+  recipes,
+  recipeCollection,
+  groceryList,
+  session
 });
 const mapDispatchToProps = {
   getInstructions,
@@ -29,7 +36,8 @@ const mapDispatchToProps = {
   changeNoteValue,
   deleteNoteFromRecipe,
   addGroceryItem,
-  removeGroceryItem
+  removeGroceryItem,
+  auth0Login
 };
 
 export class RecipeContainer extends React.Component {
@@ -43,6 +51,10 @@ export class RecipeContainer extends React.Component {
 
   componentWillMount() {
     this.setRecipe(this.props);
+  }
+
+  componentDidMount() {
+    // document.title = `Recipe: ${this.state.recipe.label}`;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -75,6 +87,13 @@ export class RecipeContainer extends React.Component {
     });
   }
 
+  cbCheck = () => {
+    const { history: { location: { state = {} } } } = this.props;
+    if (state.callback) {
+      state.callback();
+    }
+  };
+
   handleStepsClick = event => {
     const { match, recipes, getInstructions } = this.props;
     const { recipeId } = match.params;
@@ -84,7 +103,17 @@ export class RecipeContainer extends React.Component {
   };
 
   handleAddToCollectionClick = (id, recipe) => event => {
-    this.props.addToCollection(id, recipe);
+    const {
+      session: { isAuthenticated },
+      addToCollection,
+      auth0Login
+    } = this.props;
+
+    if (isAuthenticated) {
+      addToCollection(id, recipe);
+    } else {
+      auth0Login();
+    }
   };
 
   handleRemoveFromCollectionClick = id => event => {

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Profile from "./Profile";
+import Auth from "../../utils/Auth.js";
 
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -10,10 +11,9 @@ const mapState = ({ session }) => ({ session });
 
 export class ProfileContainer extends React.Component {
   render() {
-    const { session, history } = this.props;
-    const { isLoggedIn } = session;
-
-    if (!isLoggedIn) history.push("/login");
+    const { history } = this.props;
+    const auth = new Auth();
+    if (!auth.isAuthenticated()) history.push("/login");
     return <Profile />;
   }
 }

@@ -15,6 +15,13 @@ const mockProps = {
   }
 };
 
+beforeAll(() => {
+  localStorage = {
+    setItem: jest.fn(),
+    removeItem: jest.fn(),
+    getItem: jest.fn()
+  };
+});
 it("LoginContainer smoke test", () => {
   const wrapper = shallow(<LoginContainer {...mockProps} />);
   expect(wrapper.length).toBe(1);

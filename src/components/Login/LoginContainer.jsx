@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { compose } from "redux";
 import Login from "./Login";
-import { login } from "../../store/actions/login";
+import { login, auth0Profile, auth0Login } from "../../store/actions/";
 
-const mapStateToProps = ({ session }) => ({ session });
-const mapDispatchToProps = { login };
+import Auth from "../../utils/Auth";
+
+const mapStateToProps = ({ session, router }) => ({ session, router });
+const mapDispatchToProps = { login, auth0Profile, auth0Login };
 
 export class LoginContainer extends React.Component {
   constructor(props) {
@@ -16,16 +16,27 @@ export class LoginContainer extends React.Component {
     this.state = { email, name, password: "" };
   }
 
+  componentWillMount() {
+    const auth = new Auth();
+    if (auth.isAuthenticated()) {
+      this.props.history.push("/profile");
+    } else {
+      this.props.auth0Login();
+    }
+  }
+
   handleChange = ({ currentTarget: { name, value } }) => {
     this.setState({
       [name]: value
     });
   };
+
   handleSubmit = e => {
     e.preventDefault();
     const { email, password } = this.state;
     this.props.login(email, password);
   };
+
   render() {
     const { email, password, name } = this.state;
 
@@ -52,7 +63,4 @@ LoginContainer.propTypes = {
   }).isRequired
 };
 
-export default compose(
-  withRouter,
-  connect(mapStateToProps, mapDispatchToProps)
-)(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

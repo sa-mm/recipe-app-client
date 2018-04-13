@@ -5,9 +5,9 @@ import { AppBar, ToolbarGroup, FlatButton } from "material-ui";
 import { connect } from "react-redux";
 import { compose } from "redux";
 
-export const MyNavLinks = ({ isLoggedIn }) => (
+export const MyNavLinks = ({ isAuthenticated }) => (
   <ToolbarGroup>
-    {isLoggedIn ? (
+    {isAuthenticated ? (
       <FlatButton label="Profile" containerElement={<Link to="/profile" />} />
     ) : (
       <FlatButton label="Login" containerElement={<Link to="/login" />} />
@@ -23,13 +23,13 @@ export class MyAppBar extends React.Component {
   };
 
   render() {
-    const { session: { isLoggedIn }, handleMenuClick } = this.props;
+    const { session: { isAuthenticated }, handleMenuClick } = this.props;
     return (
       <AppBar
         title="Recipe App"
         onTitleClick={this.handleTitleClick}
         onLeftIconButtonClick={handleMenuClick}
-        iconElementRight={<MyNavLinks isLoggedIn={isLoggedIn} />}
+        iconElementRight={<MyNavLinks isAuthenticated={isAuthenticated} />}
       />
     );
   }
@@ -41,7 +41,7 @@ MyAppBar.propTypes = {
     replace: PropTypes.func.isRequired
   }).isRequired,
   session: PropTypes.shape({
-    isLoggedIn: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired
   }).isRequired
 };
 

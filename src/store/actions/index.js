@@ -14,3 +14,10 @@ export {
   removeGroceryItem,
   completeGroceryItem
 } from "./groceryListActions";
+export {
+  login,
+  auth0Profile,
+  auth0Login,
+  auth0LoginSuccess,
+  isAuthenticated
+} from "./login";

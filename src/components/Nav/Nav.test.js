@@ -9,7 +9,7 @@ describe("MyApp tests", () => {
       replace: jest.fn()
     },
     session: {
-      isLoggedIn: false
+      isAuthenticated: false
     }
   };
   it("MyAppBar smoke test", () => {
@@ -20,7 +20,7 @@ describe("MyApp tests", () => {
 
 describe("MyNavLinks tests", () => {
   const mockProps = {
-    isLoggedIn: false
+    isAuthenticated: false
   };
   it("MyNavLinks smoke test", () => {
     const wrapper = shallow(<MyNavLinks {...mockProps} />);
