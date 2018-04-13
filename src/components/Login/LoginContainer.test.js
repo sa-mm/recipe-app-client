@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { LoginContainer } from "./LoginContainer";
+import { auth0Login } from "../../store/actions";
 
 const mockProps = {
   login: jest.fn(),
@@ -12,16 +13,10 @@ const mockProps = {
     isLoggedIn: false,
     email: "",
     name: ""
-  }
+  },
+  auth0Login: jest.fn()
 };
 
-beforeAll(() => {
-  localStorage = {
-    setItem: jest.fn(),
-    removeItem: jest.fn(),
-    getItem: jest.fn()
-  };
-});
 it("LoginContainer smoke test", () => {
   const wrapper = shallow(<LoginContainer {...mockProps} />);
   expect(wrapper.length).toBe(1);

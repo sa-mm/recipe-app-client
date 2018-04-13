@@ -4,7 +4,8 @@ import GroceryList from "./GroceryList";
 
 const mockProps = {
   groceryList: [],
-  handleGroceryItemCheck: jest.fn()
+  handleGroceryItemCheck: jest.fn(),
+  handleRouteBtnClick: jest.fn()
 };
 
 it("GroceryList smoke test", () => {

@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import { LoginCallbackContainer } from "./LoginCallbackContainer";
 
 const mockProps = {
-  router: { location: { hash: "", pathname: "", search: "" } }
+  history: { location: { hash: "", pathname: "", search: "" } }
 };
 
 it("LoginCallbackContainer smoke test", () => {
