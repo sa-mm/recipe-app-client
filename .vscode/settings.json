@@ -1,0 +1,4 @@
+{
+  "jest.autoEnable": false,
+  "jest.pathToJest": "node scripts/test.js --env=jsdom"
+}
