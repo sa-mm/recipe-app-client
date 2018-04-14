@@ -14,7 +14,8 @@ import {
   deleteNoteFromRecipe,
   addGroceryItem,
   removeGroceryItem,
-  auth0Login
+  auth0Login,
+  makeAuthorizedCall
 } from "../../store/actions";
 
 const mapStateToProps = ({
@@ -37,7 +38,8 @@ const mapDispatchToProps = {
   deleteNoteFromRecipe,
   addGroceryItem,
   removeGroceryItem,
-  auth0Login
+  auth0Login,
+  makeAuthorizedCall
 };
 
 export class RecipeContainer extends React.Component {
@@ -99,11 +101,13 @@ export class RecipeContainer extends React.Component {
     const {
       session: { isAuthenticated },
       addToCollection,
-      auth0Login
+      auth0Login,
+      makeAuthorizedCall
     } = this.props;
 
     if (isAuthenticated) {
       addToCollection(id, recipe);
+      makeAuthorizedCall();
     } else {
       auth0Login();
     }

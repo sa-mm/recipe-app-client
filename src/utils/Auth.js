@@ -7,7 +7,7 @@ export default class Auth {
     domain: "recipe-app.auth0.com",
     clientID: "vR3EcZ6HPY9xqk7Fer1jrNX7n6bcJsCB",
     redirectUri: "http://localhost:3000/login_cb",
-    audience: "https://recipe-app.auth0.com/userinfo",
+    audience: "https://recipe-app.mcmyler.com",
     responseType: "token id_token",
     scope: "openid profile"
   });

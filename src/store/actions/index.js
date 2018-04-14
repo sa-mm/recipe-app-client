@@ -7,7 +7,8 @@ export {
   addInstructionsToCollectionRecipe,
   addNoteToRecipe,
   changeNoteValue,
-  deleteNoteFromRecipe
+  deleteNoteFromRecipe,
+  makeAuthorizedCall
 } from "./collectionActions";
 export {
   addGroceryItem,

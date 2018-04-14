@@ -1,3 +1,5 @@
+import { axiosInstance } from "../../utils/api";
+
 export const ADD_RECIPE_TO_COLLECTION = "ADD_RECIPE_TO_COLLECTION";
 export const REMOVE_RECIPE_FROM_COLLECTION = "REMOVE_RECIPE_FROM_COLLECTION";
 
@@ -60,5 +62,32 @@ export const deleteNoteFromRecipe = (id, noteId) => {
       id,
       noteId
     }
+  };
+};
+
+export const makeAuthorizedCall = () => {
+  return dispatch => {
+    dispatch({ type: "AUTHORIZED_CALL" });
+    axiosInstance({
+      method: "get",
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("access_token")
+      },
+      url: "/authorized"
+    })
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch(err => console.log(err));
+
+    //   axiosInstance({
+    //     method: "post",
+    //     headers: {
+    //       authorization: "Bearer " + localStorage.getItem("access_token")
+    //     },
+    //     url: "/timesheets"
+    //   })
+    //     .then(({ data }) => console.log(data))
+    //     .catch(err => console.log(err));
   };
 };
