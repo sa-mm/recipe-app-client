@@ -69,11 +69,16 @@ export const makeAuthorizedCall = () => {
   return dispatch => {
     dispatch({ type: "AUTHORIZED_CALL" });
     axiosInstance({
-      method: "get",
+      method: "post",
       headers: {
         authorization: "Bearer " + localStorage.getItem("access_token")
       },
-      url: "/authorized"
+      url: "/api/user",
+      data: {
+        name: "me",
+        email: "me@me.com",
+        sub: "blahblhalb"
+      }
     })
       .then(({ data }) => {
         console.log(data);
