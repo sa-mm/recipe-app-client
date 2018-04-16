@@ -5,7 +5,7 @@ import { RecipeAppDrawer } from "./RecipeAppDrawer";
 const mockProps = {
   drawerOpen: false,
   handleMenuClick: jest.fn(),
-  recipeCollection: [],
+  recipeCollection: {},
   completeGroceryItem: jest.fn(),
   groceryList: []
 };

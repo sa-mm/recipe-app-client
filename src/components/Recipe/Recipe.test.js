@@ -12,7 +12,7 @@ const mockProps = {
   handleRemoveFromCollectionClick: jest.fn(),
   isInCollection: false,
   handleAddNoteClick: jest.fn(),
-  notes: [],
+  notes: {},
   newNote: false,
   handleNoteChange: jest.fn(),
   handleAddNoteToRecipe: jest.fn(),

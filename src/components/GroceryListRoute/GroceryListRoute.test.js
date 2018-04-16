@@ -3,7 +3,10 @@ import { shallow } from "enzyme";
 import { GroceryListRoute } from "./GroceryListRoute";
 
 const mockProps = {
-  groceryList: []
+  groceryList: [],
+  history: {},
+  location: {},
+  match: {}
 };
 
 it("GroceryListRoute smoke test", () => {

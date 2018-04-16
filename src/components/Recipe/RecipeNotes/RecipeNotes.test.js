@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 import RecipeNotes from "./RecipeNotes";
 
 const mockProps = {
-  notes: [],
+  notes: {},
   newNote: true,
   handleNoteChange: jest.fn(),
   handleAddNoteToRecipe: jest.fn()

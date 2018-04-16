@@ -3,7 +3,8 @@ import { shallow } from "enzyme";
 import { RecipeContainer } from "./RecipeContainer";
 
 const mockProps = {
-  recipeCollection: [],
+  recipe: {},
+  recipeCollection: {},
   groceryList: [],
   getInstructions: jest.fn(),
   addToCollection: jest.fn(),
