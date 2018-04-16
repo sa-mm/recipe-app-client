@@ -11,7 +11,7 @@ const RecipeNotes = props => {
     <Paper>
       <div className="RecipeNotes">
         <Subheader>Recipe Notes</Subheader>
-        {notes.map(({ noteId, text = "" }) => {
+        {Object.entries(notes).map(([noteId, text]) => {
           return (
             <Note
               key={noteId}
@@ -27,7 +27,7 @@ const RecipeNotes = props => {
 };
 
 RecipeNotes.propTypes = {
-  notes: PropTypes.array.isRequired,
+  notes: PropTypes.object.isRequired,
   newNote: PropTypes.bool.isRequired,
   handleNoteChange: PropTypes.func.isRequired
 };

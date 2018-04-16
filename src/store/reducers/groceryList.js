@@ -6,16 +6,13 @@ import {
 
 const groceryListReducer = (state = [], action) => {
   const { type, payload = {} } = action;
-  const { id, item } = payload;
+  const { recipeId, item, itemId } = payload;
   switch (type) {
     case ADD_GROCERY_ITEM:
-      return [
-        ...state,
-        { id: item + id, item, recipeId: id, completed: false }
-      ];
+      return [...state, { id: itemId, item, recipeId, completed: false }];
     case COMPLETE_GROCERY_ITEM:
       return state.map(e => {
-        if (e.id === item + id) {
+        if (e.id === itemId && e.recipeId === recipeId) {
           return {
             ...e,
             completed: !e.completed,
@@ -25,7 +22,7 @@ const groceryListReducer = (state = [], action) => {
         return e;
       });
     case REMOVE_GROCERY_ITEM:
-      return state.filter(e => e.id !== item + id);
+      return state.filter(e => e.id !== itemId && e.recipeId === recipeId);
     default:
       return state;
   }

@@ -26,7 +26,6 @@ const Recipe = props => {
     handleNoteChange,
     handleDeleteNoteClick,
     handleIngredientCheck,
-    recipeId,
     groceryList
   } = props;
 
@@ -40,14 +39,14 @@ const Recipe = props => {
         <Paper>
           <List>
             <Subheader>Ingredients</Subheader>
-            {ingredients.map(({ text }, i) => {
+            {ingredients.map(({ text, id }, i) => {
               return (
                 <ListItem
-                  key={text + recipeId}
+                  key={id}
                   leftCheckbox={
                     <Checkbox
-                      onCheck={handleIngredientCheck(text)}
-                      checked={checkGroceryList(text + recipeId, groceryList)}
+                      onCheck={handleIngredientCheck(id, text)}
+                      checked={checkGroceryList(id, groceryList)}
                     />
                   }
                 >
@@ -117,7 +116,7 @@ Recipe.propTypes = {
   handleRemoveFromCollectionClick: PropTypes.func.isRequired,
   isInCollection: PropTypes.bool.isRequired,
   handleAddNoteClick: PropTypes.func.isRequired,
-  notes: PropTypes.array.isRequired,
+  notes: PropTypes.object.isRequired,
   newNote: PropTypes.bool.isRequired,
   handleNoteChange: PropTypes.func.isRequired,
   handleDeleteNoteClick: PropTypes.func.isRequired,

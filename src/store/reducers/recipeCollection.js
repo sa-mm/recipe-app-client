@@ -8,63 +8,59 @@ import {
   GET_RECIPE_SUCCESS
 } from "../actions/collectionActions";
 
-const recipeCollectionReducer = (state = [], action) => {
+const recipeCollectionReducer = (state = {}, action) => {
   const { type, payload = {} } = action;
   const { id, recipe, instructions, noteId, text = "", list } = payload;
   switch (type) {
     case GET_RECIPE_SUCCESS:
       return list;
     case ADD_RECIPE_TO_COLLECTION:
-      return [...state, { id, recipe }];
-    case REMOVE_RECIPE_FROM_COLLECTION:
-      return state.filter(e => e.id !== id);
+      return { ...state, [id]: recipe };
+    case REMOVE_RECIPE_FROM_COLLECTION: {
+      const { [id]: deletedKey, ...rest } = state;
+      return { ...rest };
+    }
     case ADD_INSTRUCTIONS_TO_RECIPE:
-      return state.map(recipe => {
-        if (recipe.id === id) return { ...recipe, instructions };
-        return recipe;
-      });
-    case ADD_NOTE_TO_RECIPE:
-      return state.map(item => {
-        if (item.id === id) {
-          const { notes = [], notesCounter = 0 } = item;
-          return {
-            ...item,
-            notes: [
-              ...notes,
-              {
-                noteId: notesCounter,
-                text
-              }
-            ],
-            notesCounter: notesCounter + 1
-          };
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          instructions
         }
-        return item;
-      });
-    case CHANGE_NOTE_VALUE:
-      return state.map(item => {
-        if (item.id === id) {
-          const { notes } = item;
-          return {
-            ...item,
-            notes: notes.map(note => {
-              if (note.noteId === noteId) return { noteId, text };
-              return note;
-            })
-          };
+      };
+    case ADD_NOTE_TO_RECIPE: {
+      const { notes = {} } = state[id];
+      notes[noteId] = text;
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          notes: { ...notes }
         }
-        return item;
-      });
-    case DELETE_NOTE_FROM_RECIPE:
-      return state.map(item => {
-        if (item.id === id && item.notes) {
-          return {
-            ...item,
-            notes: item.notes.filter(e => e.noteId !== noteId)
-          };
+      };
+    }
+    case CHANGE_NOTE_VALUE: {
+      const { notes = {} } = state[id];
+      notes[noteId] = text;
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          notes: { ...notes }
         }
-        return item;
-      });
+      };
+    }
+    case DELETE_NOTE_FROM_RECIPE: {
+      const { notes = {} } = state[id];
+      const { [noteId]: noteToDelete, ...rest } = notes;
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          notes: { ...rest }
+        }
+      };
+    }
     default:
       return state;
   }

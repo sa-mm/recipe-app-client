@@ -8,9 +8,11 @@ export const ADD_INSTRUCTIONS_FAILURE = "ADD_INSTRUCTIONS_FAILURE";
 const addInstructionsSuccess = (recipeId, instructions, recipe) => {
   return {
     type: ADD_INSTRUCTIONS_SUCCESS,
-    id: recipeId,
-    instructions,
-    recipe
+    payload: {
+      id: recipeId,
+      instructions,
+      recipe
+    }
   };
 };
 
@@ -37,18 +39,18 @@ export const getInstructions = (recipeId, recipe) => {
       }
     })
       .then(({ data }) => {
-        console.log(data);
         const { instructions } = data;
         dispatch(addInstructionsSuccess(recipeId, instructions, recipe));
 
-        if (recipeCollection.some(e => e.id === recipeId)) {
+        if (recipeCollection[recipeId]) {
           dispatch(addInstructionsToCollectionRecipe(recipeId, instructions));
         }
       })
-      .catch(({ response }) => {
-        const { status, data: { error } } = response;
-        dispatch(addInstructionsFailure(status, error.message));
-        console.log(response);
+      .catch(err => {
+        if (err.response) {
+          const { status, data: { error: { message } } } = err.response;
+          dispatch(addInstructionsFailure(status, message));
+        }
       });
   };
 };

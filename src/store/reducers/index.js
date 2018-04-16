@@ -1,11 +1,11 @@
-import recipes from "./recipes";
+import recipe from "./recipe";
 import search from "./search";
 import session from "./session";
 import error from "./error";
 import recipeCollection from "./recipeCollection";
 import groceryList from "./groceryList";
 const reducers = {
-  recipes,
+  recipe,
   recipeCollection,
   search,
   session,

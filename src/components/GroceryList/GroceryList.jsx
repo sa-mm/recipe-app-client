@@ -47,7 +47,7 @@ const GroceryList = props => {
               leftCheckbox={
                 <Checkbox
                   checked={completed}
-                  onCheck={handleGroceryItemCheck(recipeId, item)}
+                  onCheck={handleGroceryItemCheck(recipeId, id, item)}
                 />
               }
               style={{ textDecoration: completed ? "line-through" : "none" }}

@@ -1,7 +1,11 @@
-export const addRecipe = (recipeId, recipe) => {
+export const ADD_RECIPE = "ADD_RECIPE";
+
+export const addRecipe = (id, recipe) => {
   return {
     type: "ADD_RECIPE",
-    id: recipeId,
-    recipe
+    payload: {
+      id,
+      recipe
+    }
   };
 };

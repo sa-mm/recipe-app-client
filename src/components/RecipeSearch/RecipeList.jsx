@@ -10,14 +10,12 @@ const RecipeList = props => {
   return (
     <div className="RecipeList">
       {results.map((recipe, i) => {
-        const { label, image, uri } = recipe;
-        const index = uri.search("#");
-        const recipeId = uri.substring(index + 1);
+        const { label, image, id } = recipe;
         return (
           <Card
             key={`recipes-${i}`}
             className="card"
-            onClick={handleRecipeClick(recipeId, recipe)}
+            onClick={handleRecipeClick(id, recipe)}
           >
             <CardMedia overlay={<CardTitle title={label} />}>
               <img src={image} alt={label} />

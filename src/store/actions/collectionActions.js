@@ -1,3 +1,4 @@
+import { uniqueId } from "lodash";
 import { axiosInstance } from "../../utils/api";
 
 export const ADD_RECIPE_TO_COLLECTION = "ADD_RECIPE_TO_COLLECTION";
@@ -41,7 +42,8 @@ export const addInstructionsToCollectionRecipe = (id, instructions) => {
   };
 };
 
-export const addNoteToRecipe = (id, noteId, text) => {
+export const addNoteToRecipe = (id, text) => {
+  const noteId = uniqueId();
   return {
     type: ADD_NOTE_TO_RECIPE,
     payload: {
@@ -126,9 +128,14 @@ export const getRecipeList = () => {
         sub
       }
     })
-      .then(({ data }) => {
+      .then(({ data = {}, status }) => {
         console.log("list data: ", data);
-        dispatch(getRecipeSuccess(data));
+        console.log("status: ", status);
+        if (status === 204) {
+          dispatch(getRecipeSuccess({}));
+        } else {
+          dispatch(getRecipeSuccess(data));
+        }
       })
       .catch(err => console.log(err));
   };

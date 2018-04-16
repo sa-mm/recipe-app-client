@@ -12,7 +12,7 @@ class RecipeNotesContainer extends React.Component {
       handleDeleteNoteClick
     } = this.props;
 
-    if (notes.length === 0) return null;
+    if (Object.keys(notes).length === 0) return null;
     return (
       <RecipeNotes
         {...{
@@ -27,7 +27,7 @@ class RecipeNotesContainer extends React.Component {
 }
 
 RecipeNotesContainer.propTypes = {
-  notes: PropTypes.array.isRequired,
+  notes: PropTypes.object.isRequired,
   newNote: PropTypes.bool.isRequired,
   handleNoteChange: PropTypes.func.isRequired,
   handleDeleteNoteClick: PropTypes.func.isRequired

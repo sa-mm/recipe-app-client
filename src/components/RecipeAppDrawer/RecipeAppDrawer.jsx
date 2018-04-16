@@ -51,10 +51,11 @@ export class RecipeAppDrawer extends React.Component {
           hasRouteBtn={true}
         />
         <Subheader>Recipe Collection</Subheader>
-        {recipeCollection.map(({ recipe, id }) => {
+        {Object.entries(recipeCollection).map(([id, recipe]) => {
+          const { label } = recipe;
           return (
             <MenuItem key={id} onClick={this.handleItemClick(recipe, id)}>
-              {recipe.label}
+              {label}
             </MenuItem>
           );
         })}
@@ -66,12 +67,7 @@ export class RecipeAppDrawer extends React.Component {
 RecipeAppDrawer.propTypes = {
   drawerOpen: PropTypes.bool.isRequired,
   handleMenuClick: PropTypes.func.isRequired,
-  recipeCollection: PropTypes.arrayOf(
-    PropTypes.shape({
-      recipe: PropTypes.object.isRequired,
-      id: PropTypes.string.isRequired
-    })
-  ).isRequired,
+  recipeCollection: PropTypes.object.isRequired,
   completeGroceryItem: PropTypes.func.isRequired,
   groceryList: PropTypes.arrayOf(
     PropTypes.shape({

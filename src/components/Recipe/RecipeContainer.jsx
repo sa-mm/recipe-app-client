@@ -19,12 +19,12 @@ import {
 } from "../../store/actions";
 
 const mapStateToProps = ({
-  recipes,
+  recipe,
   recipeCollection,
   groceryList,
   session
 }) => ({
-  recipes,
+  recipe,
   recipeCollection,
   groceryList,
   session
@@ -46,9 +46,8 @@ export class RecipeContainer extends React.Component {
   state = {
     recipe: {},
     newNote: false,
-    notes: [],
-    isInCollection: null,
-    notesCounter: 0
+    notes: {},
+    isInCollection: null
   };
 
   componentWillMount() {
@@ -64,29 +63,21 @@ export class RecipeContainer extends React.Component {
   }
 
   setRecipe(props) {
-    const { match, recipes, recipeCollection } = props;
+    const { match, recipeCollection } = props;
     const { recipeId } = match.params;
+    let recipe = props.recipe;
 
-    let recipe;
-    let notes = [];
     let isInCollection = false;
-    let notesCounter = 0;
-    if (recipeCollection.some(recipe => recipe.id === recipeId)) {
-      const item = recipeCollection.find(e => e.id === recipeId);
-      recipe = item.recipe;
-      recipe.instructions = item.instructions;
-      notes = item.notes || this.state.notes;
+    if (recipeCollection[recipeId]) {
+      recipe = recipeCollection[recipeId];
       isInCollection = true;
-      notesCounter = item.notesCounter;
-    } else {
-      recipe = recipes[recipeId] || Object.values(recipes)[0];
     }
+
+    document.title = `Recipe: ${recipe.label}`;
 
     this.setState({
       recipe,
-      notes,
-      isInCollection,
-      notesCounter
+      isInCollection
     });
   }
 
@@ -126,7 +117,7 @@ export class RecipeContainer extends React.Component {
     this.props.changeNoteValue(id, noteId, value);
   };
 
-  handleIngredientCheck = id => item => e => {
+  handleIngredientCheck = id => (itemId, item) => e => {
     const { currentTarget: { checked } } = e;
     const {
       session: { isAuthenticated },
@@ -137,9 +128,9 @@ export class RecipeContainer extends React.Component {
 
     if (isAuthenticated) {
       if (checked) {
-        addGroceryItem(id, item);
+        addGroceryItem(id, itemId, item);
       } else {
-        removeGroceryItem(id, item);
+        removeGroceryItem(id, itemId, item);
       }
     } else {
       auth0Login();
@@ -148,7 +139,7 @@ export class RecipeContainer extends React.Component {
 
   render() {
     const { match, groceryList } = this.props;
-    const { newNote, notes, recipe, isInCollection } = this.state;
+    const { newNote, recipe, isInCollection } = this.state;
     const { recipeId } = match.params;
 
     const {
@@ -156,7 +147,8 @@ export class RecipeContainer extends React.Component {
       ingredients = [],
       url = "",
       instructions = null,
-      image
+      image = "",
+      notes = {}
     } = recipe;
 
     return (
@@ -196,8 +188,8 @@ RecipeContainer.propTypes = {
       recipeId: PropTypes.string.isRequired
     })
   }),
-  recipes: PropTypes.object.isRequired,
-  recipeCollection: PropTypes.array.isRequired,
+  recipe: PropTypes.object.isRequired,
+  recipeCollection: PropTypes.object.isRequired,
   groceryList: PropTypes.array.isRequired,
   getInstructions: PropTypes.func.isRequired,
   addToCollection: PropTypes.func.isRequired,

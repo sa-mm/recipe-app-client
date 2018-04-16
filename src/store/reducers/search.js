@@ -1,18 +1,14 @@
-const initialState = { results: [], meta: {} };
+import { GET_SEARCH_RESULTS_SUCCESS } from "../actions/searchRecipe";
+
+const initialState = { results: [], meta: { q: null, to: null } };
 
 const searchReducer = (state = initialState, action) => {
   const { type, results, meta } = action;
   switch (type) {
-    case "GET_SEARCH_RESULTS":
+    case GET_SEARCH_RESULTS_SUCCESS:
       return {
         ...state,
-        results,
-        meta
-      };
-    case "GET_MORE_SEARCH_RESULTS":
-      return {
-        ...state,
-        results: state.results.concat(results),
+        results: [...state.results, ...results],
         meta
       };
     default:
