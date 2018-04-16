@@ -9,7 +9,6 @@ const RecipeList = props => {
   const { more } = meta;
   return (
     <div className="RecipeList">
-      {/* <div className="card-container"> */}
       {results.map((recipe, i) => {
         const { label, image, uri } = recipe;
         const index = uri.search("#");
@@ -31,7 +30,6 @@ const RecipeList = props => {
           <CardText>more recipes…</CardText>
         </Card>
       )}
-      {/* </div> */}
     </div>
   );
 };
