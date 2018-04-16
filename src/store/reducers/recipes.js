@@ -15,7 +15,10 @@ const recipeReducer = (state = initialState, action) => {
     case "ADD_RECIPE":
       return { ...state, [id]: recipe };
     case ADD_INSTRUCTIONS_SUCCESS:
-      return { ...state, [id]: { ...state[id], instructions } };
+      if (state[id]) {
+        return { ...state, [id]: { ...state[id], instructions } };
+      }
+      return { ...state, [id]: { ...recipe, instructions } };
     case ADD_INSTRUCTIONS_FAILURE:
       return { ...state };
     default:

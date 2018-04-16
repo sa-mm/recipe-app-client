@@ -1,4 +1,5 @@
-// import axios from "axios";
+import { axiosInstance } from "../../utils/api";
+import { getRecipeList } from "./index";
 import { push } from "react-router-redux";
 import Auth from "../../utils/Auth";
 
@@ -25,7 +26,7 @@ const loginFailure = () => {
   };
 };
 
-export const auth0Profile = profile => {
+const auth0ProfileSuccess = profile => {
   return {
     type: AUTH0_PROFILE_SUCCESS,
     payload: profile
@@ -64,5 +65,27 @@ export const login = (email, password) => {
     } else {
       dispatch(loginFailure());
     }
+  };
+};
+
+export const auth0Profile = profile => {
+  return dispatch => {
+    dispatch(auth0ProfileSuccess(profile));
+    dispatch(persistProfile());
+    dispatch(getRecipeList());
+  };
+};
+
+export const persistProfile = profile => {
+  return (dispatch, getState) => {
+    const { session } = getState();
+    axiosInstance({
+      headers: {
+        authorization: "Bearer " + localStorage.getItem("access_token")
+      },
+      method: "post",
+      url: "/api/user",
+      data: session
+    });
   };
 };

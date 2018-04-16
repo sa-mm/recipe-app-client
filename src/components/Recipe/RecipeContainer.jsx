@@ -15,7 +15,7 @@ import {
   addGroceryItem,
   removeGroceryItem,
   auth0Login,
-  makeAuthorizedCall
+  persistRecipeList
 } from "../../store/actions";
 
 const mapStateToProps = ({
@@ -39,7 +39,7 @@ const mapDispatchToProps = {
   addGroceryItem,
   removeGroceryItem,
   auth0Login,
-  makeAuthorizedCall
+  persistRecipeList
 };
 
 export class RecipeContainer extends React.Component {
@@ -74,6 +74,7 @@ export class RecipeContainer extends React.Component {
     if (recipeCollection.some(recipe => recipe.id === recipeId)) {
       const item = recipeCollection.find(e => e.id === recipeId);
       recipe = item.recipe;
+      recipe.instructions = item.instructions;
       notes = item.notes || this.state.notes;
       isInCollection = true;
       notesCounter = item.notesCounter;
@@ -89,12 +90,8 @@ export class RecipeContainer extends React.Component {
     });
   }
 
-  handleStepsClick = event => {
-    const { match, recipes, getInstructions } = this.props;
-    const { recipeId } = match.params;
-    const recipe = recipes[recipeId];
-    const { url } = recipe;
-    getInstructions(url, recipeId);
+  handleStepsClick = (recipeId, recipe) => event => {
+    this.props.getInstructions(recipeId, recipe);
   };
 
   handleAddToCollectionClick = (id, recipe) => event => {
@@ -102,12 +99,12 @@ export class RecipeContainer extends React.Component {
       session: { isAuthenticated },
       addToCollection,
       auth0Login,
-      makeAuthorizedCall
+      persistRecipeList
     } = this.props;
 
     if (isAuthenticated) {
       addToCollection(id, recipe);
-      makeAuthorizedCall();
+      persistRecipeList(id);
     } else {
       auth0Login();
     }
@@ -176,7 +173,7 @@ export class RecipeContainer extends React.Component {
           recipeId,
           groceryList
         }}
-        handleStepsClick={this.handleStepsClick}
+        handleStepsClick={this.handleStepsClick(recipeId, recipe)}
         handleAddToCollectionClick={this.handleAddToCollectionClick(
           recipeId,
           recipe

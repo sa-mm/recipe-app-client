@@ -19,5 +19,5 @@ export const store = createStore(
   combineReducers({
     ...reducers
   }),
-  composeEnhancers(applyMiddleware(thunk, loggingMiddleware), persistState())
+  composeEnhancers(applyMiddleware(thunk, loggingMiddleware))
 );

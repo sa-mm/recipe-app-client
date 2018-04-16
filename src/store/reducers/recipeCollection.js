@@ -4,13 +4,16 @@ import {
   ADD_INSTRUCTIONS_TO_RECIPE,
   ADD_NOTE_TO_RECIPE,
   CHANGE_NOTE_VALUE,
-  DELETE_NOTE_FROM_RECIPE
+  DELETE_NOTE_FROM_RECIPE,
+  GET_RECIPE_SUCCESS
 } from "../actions/collectionActions";
 
 const recipeCollectionReducer = (state = [], action) => {
   const { type, payload = {} } = action;
-  const { id, recipe, instructions, noteId, text = "" } = payload;
+  const { id, recipe, instructions, noteId, text = "", list } = payload;
   switch (type) {
+    case GET_RECIPE_SUCCESS:
+      return list;
     case ADD_RECIPE_TO_COLLECTION:
       return [...state, { id, recipe }];
     case REMOVE_RECIPE_FROM_COLLECTION:
