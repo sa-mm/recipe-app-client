@@ -28,6 +28,8 @@ export const addToCollection = (id, recipe) => {
   };
 };
 
+// rewrite this as a thunk when the backend is built out
+// currently, removing in ui does not remove from database.
 export const removeFromCollection = id => {
   return {
     type: REMOVE_RECIPE_FROM_COLLECTION,
@@ -140,25 +142,3 @@ export const getRecipeList = () => {
       .catch(err => console.log(err));
   };
 };
-
-// export const makeAuthorizedCall = () => {
-//   return dispatch => {
-//     dispatch({ type: "AUTHORIZED_CALL" });
-//     axiosInstance({
-//       method: "post",
-//       headers: {
-//         authorization: "Bearer " + localStorage.getItem("access_token")
-//       },
-//       url: "/api/user",
-//       data: {
-//         name: "me",
-//         email: "me@me.com",
-//         sub: "blahblhalb"
-//       }
-//     })
-//       .then(({ data }) => {
-//         console.log(data);
-//       })
-//       .catch(err => console.log(err));
-//   };
-// };

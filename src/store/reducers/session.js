@@ -4,7 +4,7 @@ import {
   AUTH0_PROFILE_SUCCESS,
   AUTH0_LOGIN_SUCCESS,
   AUTH0_LOGIN_STARTED
-} from "../actions/login";
+} from "../actions/sessionActions";
 
 const initialState = {
   email: "",

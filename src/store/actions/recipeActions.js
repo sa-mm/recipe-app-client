@@ -1,9 +1,40 @@
 import { axiosInstance } from "../../utils/api";
-
 import { addInstructionsToCollectionRecipe } from "./index";
 
 export const ADD_INSTRUCTIONS_SUCCESS = "ADD_INSTRUCTIONS_SUCCESS";
 export const ADD_INSTRUCTIONS_FAILURE = "ADD_INSTRUCTIONS_FAILURE";
+
+export const ADD_RECIPE = "ADD_RECIPE";
+
+export const addRecipe = (id, recipe) => {
+  const {
+    uri,
+    label,
+    image,
+    source,
+    url,
+    shareAs,
+    yield: recipeYield,
+    ingredients
+  } = recipe;
+  return {
+    type: "ADD_RECIPE",
+    payload: {
+      id,
+      recipe: {
+        id,
+        label,
+        ingredients,
+        uri,
+        url,
+        shareAs,
+        image,
+        source,
+        recipeYield
+      }
+    }
+  };
+};
 
 const addInstructionsSuccess = (recipeId, instructions, recipe) => {
   return {

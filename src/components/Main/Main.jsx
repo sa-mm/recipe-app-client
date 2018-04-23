@@ -7,7 +7,7 @@ import Login from "../Login";
 import LoginCallback from "../LoginCallback";
 import Profile from "../Profile";
 import GroceryListRoute from "../GroceryListRoute";
-
+import RecipeCollection from "../RecipeCollection";
 const Main = props => {
   return (
     <main>
@@ -18,6 +18,7 @@ const Main = props => {
         <Route path="/login_cb" component={LoginCallback} />
         <Route path="/profile" component={Profile} />
         <Route path="/list" component={GroceryListRoute} />
+        <Route path="/collection" component={RecipeCollection} />
       </Switch>
     </main>
   );

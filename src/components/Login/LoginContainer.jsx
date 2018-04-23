@@ -40,7 +40,11 @@ export class LoginContainer extends React.Component {
   render() {
     const { email, password, name } = this.state;
 
-    return (
+    const usingAuth0 = true;
+
+    return usingAuth0 ? (
+      <div>Redirecting...</div>
+    ) : (
       <Login
         {...{ email, password, name }}
         handleChange={this.handleChange}

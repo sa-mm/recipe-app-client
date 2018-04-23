@@ -2,7 +2,7 @@ import recipe from "./recipe";
 import search from "./search";
 import session from "./session";
 import error from "./error";
-import recipeCollection from "./recipeCollection";
+import recipeCollection from "./collection";
 import groceryList from "./groceryList";
 const reducers = {
   recipe,

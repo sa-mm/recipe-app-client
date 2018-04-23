@@ -3,7 +3,6 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import createHistory from "history/createBrowserHistory";
 
 import thunk from "redux-thunk";
-import persistState from "redux-localstorage";
 import loggingMiddleware from "./middleware/loggingMiddleware";
 
 import reducers from "./reducers"; // Or wherever you keep your reducers

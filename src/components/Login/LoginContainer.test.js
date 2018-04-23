@@ -1,7 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { LoginContainer } from "./LoginContainer";
-import { auth0Login } from "../../store/actions";
 
 const mockProps = {
   login: jest.fn(),

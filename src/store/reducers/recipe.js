@@ -1,9 +1,8 @@
 import {
+  ADD_RECIPE,
   ADD_INSTRUCTIONS_SUCCESS,
   ADD_INSTRUCTIONS_FAILURE
-} from "../actions/addInstructions";
-
-import { ADD_RECIPE } from "../actions/addRecipe";
+} from "../actions/recipeActions";
 
 const recipeReducer = (state = {}, action) => {
   const { type, payload = {} } = action;

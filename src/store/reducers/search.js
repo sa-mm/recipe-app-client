@@ -1,4 +1,4 @@
-import { GET_SEARCH_RESULTS_SUCCESS } from "../actions/searchRecipe";
+import { GET_SEARCH_RESULTS_SUCCESS } from "../actions/searchActions";
 
 const initialState = { results: [], meta: { q: null, to: null } };
 

@@ -1,6 +1,5 @@
-export { addRecipe } from "./addRecipe";
-export { getInstructions } from "./addInstructions";
-export { searchRecipe, additionalRecipes } from "./searchRecipe";
+export { addRecipe, getInstructions } from "./recipeActions";
+export { searchRecipe, additionalRecipes } from "./searchActions";
 export {
   addToCollection,
   removeFromCollection,
@@ -22,4 +21,4 @@ export {
   auth0Login,
   auth0LoginSuccess,
   isAuthenticated
-} from "./login";
+} from "./sessionActions";
